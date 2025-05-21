@@ -66,12 +66,30 @@ SELECT * FROM student
     WHERE name LIKE ('%im');
 
 SELECT * FROM student LIMIT 10;
--- FOR PAGINATION
+-- FOR PAGINATION start
 SELECT * FROM student ORDER BY id LIMIT 5 OFFSET 0;
 SELECT * FROM student ORDER BY id LIMIT 5 OFFSET 5 * 1;
 SELECT * FROM student ORDER BY id LIMIT 5 OFFSET 10;
 -- Pagination END
-SELECT * FROM student;
+
 -- Update
 UPDATE student set email = 'defaultNewEmail@gmail.com',age = 21
     WHERE id = 16;
+-- to show recent TIME AND DATE
+SELECT now():: TIME;
+
+-- Which forment i show
+SELECT to_char(now(),'dd-mm-yyyy');
+-- আজ থেকে ১ ইয়ার আগের  তারিখ জানতে 
+SELECT CURRENT_DATE -  INTERVAL'1 MONTH';
+SELECT age(CURRENT_DATE ,'2003/12/23');
+CREATE TABLE timez(ts TIMESTAMP WITHOUT TIME ZONE, tsz TIMESTAMP WITH TIME ZONE)
+INSERT into timez VALUES ('2025-05-20 10:00:00','2025-05-20 12:06:00')
+SELECT * FROM timez;
+
+
+-- ----------------------
+-- group ওয়াইজ filter
+SELECT country ,round(avg(age)) FROM student 
+    GROUP BY country
+    HAVING avg(age) > 20 ;
